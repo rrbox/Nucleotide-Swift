@@ -1,10 +1,6 @@
 import XCTest
 @testable import Nucleotide
 
-extension String {
-    subscript(at: Int) -> Character { self[self.index(self.startIndex, offsetBy: at)] }
-}
-
 final class NucleotideTests: XCTestCase {
     var seq: BaseSequence<DNA>?
     override func setUp() async throws {
