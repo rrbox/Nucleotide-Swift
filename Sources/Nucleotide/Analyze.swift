@@ -16,12 +16,25 @@ public extension BaseSequence {
     /// // or
     /// print(seq.contentTotal(.s)) // 10
     /// ```
-    func contentTotal(_ b: Nucleotide) -> Int {
-        let mask = b.rawValue
-        return self.sequence.reduce(into: 0) { partialResult, n in
-            if (n & mask) != 0 {
-                partialResult += 1
+    /// - Parameters:
+    ///   - b: 合計を調べたい塩基
+    ///   - option: N を検索結果に含めるかどうか
+    /// - Returns: 配列に base がいくつ含まれるか. default is false.
+    func contentTotal(_ base: Nucleotide, containN option: Bool = false) -> Int {
+        let mask = base.rawValue
+        if option {
+            return self.sequence.reduce(into: 0) { partialResult, n in
+                if (n & mask) != 0 {
+                    partialResult += 1
+                }
+            }
+        } else {
+            return self.sequence.reduce(into: 0) { partialResult, n in
+                if ((n | mask) ^ mask) == 0 {
+                    partialResult += 1
+                }
             }
         }
+        
     }
 }
