@@ -67,6 +67,7 @@ public enum DNA: BaseType {
         "C": .c,
         "G": .g,
         "T": .t,
+        "N": .n,
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
@@ -74,6 +75,7 @@ public enum DNA: BaseType {
         Nucleotide.t.rawValue: "T",
         Nucleotide.c.rawValue: "C",
         Nucleotide.g.rawValue: "G",
+        Nucleotide.n.rawValue: "N",
     ]
     
 }
@@ -84,6 +86,7 @@ public enum RNA: BaseType {
         "C": .c,
         "G": .g,
         "U": .u,
+        "N": .n,
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
@@ -91,6 +94,7 @@ public enum RNA: BaseType {
         Nucleotide.u.rawValue: "U",
         Nucleotide.c.rawValue: "C",
         Nucleotide.g.rawValue: "G",
+        Nucleotide.n.rawValue: "N",
     ]
     
 }
