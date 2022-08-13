@@ -12,7 +12,7 @@ public struct Nucleotide: OptionSet {
     }
 }
 
-extension Nucleotide {
+public extension Nucleotide {
     static let a = Self.init(rawValue: 0b11)
     static let c = Self.init(rawValue: 0b11 << 2)
     static let g = Self.init(rawValue: 0b11 << 4)
@@ -28,19 +28,19 @@ extension Nucleotide {
     static let m: Self = [.a, .c]
 }
 
-extension Nucleotide {
+public extension Nucleotide {
     static let s: Self = [.g, .c]
     static let w: Self = [.a, .t]
 }
 
-extension Nucleotide {
+public extension Nucleotide {
     static let b: Self = [.g, .t, .c]
     static let d: Self = [.g, .a, .t]
     static let h: Self = [.a, .c, .t]
     static let v: Self = [.g, .c, .a]
 }
 
-extension Nucleotide {
+public extension Nucleotide {
     static let n: Self = [.a, .g, .c, .t]
     static let gap: Self = .init(rawValue: 0)
 }
