@@ -46,6 +46,8 @@ public extension BaseSequence {
         }
     }
     
+    /// 相補的な配列を算出します.
+    /// - Returns: 現在の配列の相補鎖のデータをもつ配列
     func complementaryStrand() -> BaseSequence<DNA> {
         return BaseSequence<DNA>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
