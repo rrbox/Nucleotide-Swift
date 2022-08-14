@@ -15,11 +15,5 @@ class DNATests: XCTestCase {
         XCTAssertEqual(rna.description, "RNA: AUGCAUGC")
         
     }
-    
-    func testComplementaryStrand() throws {
-        let dna: BaseSequence<DNA> = "ATGCATGC"
-        XCTAssertEqual(dna.complementaryStrand().description, "DNA: TACGTACG")
-        
-    }
 
 }

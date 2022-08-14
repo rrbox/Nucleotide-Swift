@@ -82,4 +82,10 @@ final class AnalyzeTests: XCTestCase {
         XCTAssertEqual(total, seq.contentTotal(.n, ignoreN: false))
     }
     
+    func testComplementaryStrand() throws {
+        let dna: BaseSequence<DNA> = "ATGCATGC"
+        XCTAssertEqual(dna.complementaryStrand().description, "DNA: TACGTACG")
+        
+    }
+    
 }
