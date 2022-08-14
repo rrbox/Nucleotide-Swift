@@ -6,7 +6,7 @@
 //
 
 private extension BaseSequence {
-    func contentTotalIfContainN(_ mask: UInt8) -> Int {
+    func contentTotalNotIgnoreN(_ mask: UInt8) -> Int {
         return self.sequence.reduce(into: 0) { partialResult, n in
             if (n & mask) != 0 {
                 partialResult += 1
@@ -14,7 +14,7 @@ private extension BaseSequence {
         }
     }
     
-    func contentTotalIfNotContainN(_ mask: UInt8) -> Int {
+    func contentTotalIgnoreN(_ mask: UInt8) -> Int {
         return self.sequence.reduce(into: 0) { partialResult, n in
             if ((n | mask) ^ mask) == 0 {
                 partialResult += 1
@@ -35,14 +35,14 @@ public extension BaseSequence {
     /// ```
     /// - Parameters:
     ///   - b: 合計を調べたい塩基
-    ///   - option: N を検索結果に含めるかどうかを Bool 値で指定します. default is false.
+    ///   - option: N を検索結果に含む(無視する)かどうかを Bool 値で指定します. デフォルトは true です.
     /// - Returns: 配列に base がいくつ含まれるか.
-    func contentTotal(_ base: Nucleotide, containN option: Bool = false) -> Int {
+    func contentTotal(_ base: Nucleotide, ignoreN option: Bool = true) -> Int {
         let mask = base.rawValue
         if option {
-            return self.contentTotalIfContainN(mask)
+            return self.contentTotalIgnoreN(mask)
         } else {
-            return self.contentTotalIfNotContainN(mask)
+            return self.contentTotalNotIgnoreN(mask)
         }
     }
     
