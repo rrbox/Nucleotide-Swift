@@ -5,6 +5,25 @@
 //  Created by rrbox on 2022/08/14.
 //
 
+private extension BaseSequence {
+    func contentTotalIfContainN(_ mask: UInt8) -> Int {
+        return self.sequence.reduce(into: 0) { partialResult, n in
+            if (n & mask) != 0 {
+                partialResult += 1
+            }
+        }
+    }
+    
+    func contentTotalIfNotContainN(_ mask: UInt8) -> Int {
+        return self.sequence.reduce(into: 0) { partialResult, n in
+            if ((n | mask) ^ mask) == 0 {
+                partialResult += 1
+            }
+        }
+    }
+    
+}
+
 public extension BaseSequence {
     /// 任意の複合塩基がいくつ含まれているかを算出します.
     /// ```swift
@@ -21,17 +40,9 @@ public extension BaseSequence {
     func contentTotal(_ base: Nucleotide, containN option: Bool = false) -> Int {
         let mask = base.rawValue
         if option {
-            return self.sequence.reduce(into: 0) { partialResult, n in
-                if (n & mask) != 0 {
-                    partialResult += 1
-                }
-            }
+            return self.contentTotalIfContainN(mask)
         } else {
-            return self.sequence.reduce(into: 0) { partialResult, n in
-                if ((n | mask) ^ mask) == 0 {
-                    partialResult += 1
-                }
-            }
+            return self.contentTotalIfNotContainN(mask)
         }
     }
     

@@ -10,7 +10,7 @@ import Nucleotide
 
 final class AnalyzeTests: XCTestCase {
     // N を含まない配列での塩基含有量計算テスト. 実行時間も計測.
-    func testTotalContentNotContainN() throws {
+    func testTotalContentNotContainNSeq() throws {
         let total = 1000000
         let seq = BaseSequence<DNA>.init(
             stringLiteral:
@@ -32,7 +32,7 @@ final class AnalyzeTests: XCTestCase {
     }
     
     // N を含む配列での塩基含有量計算テスト. 実行時間は計測しない.
-    func testTotalContentContainN() throws {
+    func testTotalContentContainNSeq() throws {
         let total = 100
         let seq = BaseSequence<DNA>.init(
             stringLiteral:
@@ -48,6 +48,11 @@ final class AnalyzeTests: XCTestCase {
         result = seq.contentTotal([.s], containN: true)
         // N と G が検出され, 合計される.
         XCTAssertEqual(total/2, result)
+        XCTAssertEqual(total/4, seq.contentTotal(.g))
+        XCTAssertEqual(total/2, seq.contentTotal(.a, containN: true))
+        XCTAssertEqual(0, seq.contentTotal(.c))
+        XCTAssertEqual(total, seq.contentTotal(.n, containN: true))
+        XCTAssertEqual(total, seq.contentTotal(.n, containN: false))
     }
     
 }
