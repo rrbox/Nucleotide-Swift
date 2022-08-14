@@ -22,27 +22,27 @@ public extension Nucleotide {
 
 // fasta 形式
 extension Nucleotide {
-    static let r: Self = [.a, .g]
-    static let y: Self = [.t, .c]
-    static let k: Self = [.g, .t]
-    static let m: Self = [.a, .c]
+    static let r: Nucleotide = [.a, .g]
+    static let y: Nucleotide = [.t, .c]
+    static let k: Nucleotide = [.g, .t]
+    static let m: Nucleotide = [.a, .c]
 }
 
 public extension Nucleotide {
-    static let s: Self = [.g, .c]
-    static let w: Self = [.a, .t]
+    static let s: Nucleotide = [.g, .c]
+    static let w: Nucleotide = [.a, .t]
 }
 
 public extension Nucleotide {
-    static let b: Self = [.g, .t, .c]
-    static let d: Self = [.g, .a, .t]
-    static let h: Self = [.a, .c, .t]
-    static let v: Self = [.g, .c, .a]
+    static let b: Nucleotide = [.g, .t, .c]
+    static let d: Nucleotide = [.g, .a, .t]
+    static let h: Nucleotide = [.a, .c, .t]
+    static let v: Nucleotide = [.g, .c, .a]
 }
 
 public extension Nucleotide {
-    static let n: Self = [.a, .g, .c, .t]
-    static let gap: Self = .init(rawValue: 0)
+    static let n: Nucleotide = [.a, .g, .c, .t]
+    static let gap: Nucleotide = .init(rawValue: 0)
 }
 
 public protocol BaseType {
