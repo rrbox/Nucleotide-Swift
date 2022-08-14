@@ -47,12 +47,17 @@ public extension Nucleotide {
 
 public protocol BaseType {
     static var unicodeToBaseDict: [UnicodeScalar: Nucleotide] { get }
+    static var unicodeToUInt8Dict: [UnicodeScalar: UInt8] { get }
     static var baseToUnicodeDict: [UInt8: UnicodeScalar] { get }
 }
 
 extension BaseType {
     static func convertUnicodeToBase(_ unicode: UnicodeScalar) -> Nucleotide? {
         return Self.unicodeToBaseDict[unicode]
+    }
+    
+    static func convertUnicodeToUInt8(_ unicode: UnicodeScalar) -> UInt8? {
+        return Self.unicodeToUInt8Dict[unicode]
     }
     
     static func convertBaseToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
@@ -68,6 +73,14 @@ public enum DNA: BaseType {
         "G": .g,
         "T": .t,
         "N": .n,
+    ]
+    
+    static public var unicodeToUInt8Dict: [UnicodeScalar : UInt8] = [
+        "A": Nucleotide.a.rawValue,
+        "C": Nucleotide.c.rawValue,
+        "G": Nucleotide.g.rawValue,
+        "T": Nucleotide.t.rawValue,
+        "N": Nucleotide.n.rawValue
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
@@ -87,6 +100,14 @@ public enum RNA: BaseType {
         "G": .g,
         "U": .u,
         "N": .n,
+    ]
+    
+    static public var unicodeToUInt8Dict: [UnicodeScalar : UInt8] = [
+        "A": Nucleotide.a.rawValue,
+        "C": Nucleotide.c.rawValue,
+        "G": Nucleotide.g.rawValue,
+        "U": Nucleotide.u.rawValue,
+        "N": Nucleotide.n.rawValue
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
