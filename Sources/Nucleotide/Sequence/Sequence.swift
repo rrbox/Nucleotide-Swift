@@ -18,8 +18,8 @@ extension BaseType {
     static func convertBaseToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
         return Self.baseToUnicodeDict[base.rawValue]
     }
+    
 }
-
 
 public enum DNA: BaseType {
     public static let unicodeToBaseDict: [UnicodeScalar: Nucleotide] = [

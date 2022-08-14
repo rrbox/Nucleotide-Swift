@@ -36,4 +36,3 @@ public extension BaseSequence {
     }
     
 }
-
