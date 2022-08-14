@@ -10,17 +10,6 @@ public protocol BaseType {
     static var baseToUnicodeDict: [UInt8: Character] { get }
 }
 
-extension BaseType {
-//    static func convertUnicodeToBase(_ unicode: Unicode.UTF8.CodeUnit) -> UInt8? {
-//        return Self.unicodeToBaseDict[unicode]
-//    }
-    
-//    static func convertBaseToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
-//        return Self.baseToUnicodeDict[base.rawValue]
-//    }
-    
-}
-
 public enum DNA: BaseType {
     public static let unicodeToBaseDict: [Unicode.UTF8.CodeUnit: UInt8] = [
         UnicodeScalar("A").utf8.first!: Nucleotide.a.rawValue,
