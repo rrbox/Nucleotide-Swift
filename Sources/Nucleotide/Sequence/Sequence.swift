@@ -7,18 +7,7 @@
 
 public protocol BaseType {
     static var unicodeToBaseDict: [Unicode.UTF8.CodeUnit: UInt8] { get }
-    static var baseToUnicodeDict: [UInt8: UnicodeScalar] { get }
-}
-
-extension BaseType {
-    static func convertUnicodeToBase(_ unicode: Unicode.UTF8.CodeUnit) -> UInt8? {
-        return Self.unicodeToBaseDict[unicode]
-    }
-    
-    static func convertBaseToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
-        return Self.baseToUnicodeDict[base.rawValue]
-    }
-    
+    static var baseToUnicodeDict: [UInt8: Character] { get }
 }
 
 public enum DNA: BaseType {
@@ -30,7 +19,7 @@ public enum DNA: BaseType {
         UnicodeScalar("N").utf8.first!: Nucleotide.n.rawValue,
     ]
     
-    public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
+    public static let baseToUnicodeDict: [UInt8: Character] = [
         Nucleotide.a.rawValue: "A",
         Nucleotide.t.rawValue: "T",
         Nucleotide.c.rawValue: "C",
@@ -49,7 +38,7 @@ public enum RNA: BaseType {
         UnicodeScalar("N").utf8.first!: Nucleotide.n.rawValue,
     ]
     
-    public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
+    public static let baseToUnicodeDict: [UInt8: Character] = [
         Nucleotide.a.rawValue: "A",
         Nucleotide.u.rawValue: "U",
         Nucleotide.c.rawValue: "C",
@@ -73,7 +62,9 @@ public struct BaseSequence<T: BaseType>: ExpressibleByStringLiteral, CustomStrin
     }
     
     public var description: String {
-        "\(T.self): \(self.sequence.reduce(into: "") {$0 += String(T.convertBaseToUnicode(Nucleotide(rawValue: $1))!)})"
+//        "\(T.self): \(self.sequence.reduce(into: "") {$0 += String(T.baseToUnicodeDict[$1]!)})"
+        "\(T.self): \(String(self.sequence.map { T.baseToUnicodeDict[$0]! }))"
+        
     }
     
 }
