@@ -16,8 +16,8 @@ public extension BaseSequence {
     /// ```
     /// - Parameters:
     ///   - b: 合計を調べたい塩基
-    ///   - option: N を検索結果に含めるかどうか
-    /// - Returns: 配列に base がいくつ含まれるか. default is false.
+    ///   - option: N を検索結果に含めるかどうかを Bool 値で指定します. default is false.
+    /// - Returns: 配列に base がいくつ含まれるか.
     func contentTotal(_ base: Nucleotide, containN option: Bool = false) -> Int {
         let mask = base.rawValue
         if option {
