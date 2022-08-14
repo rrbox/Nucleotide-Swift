@@ -68,6 +68,10 @@ public struct BaseSequence<T: BaseType>: ExpressibleByStringLiteral, CustomStrin
         }
     }
     
+    init(sequence: [UInt8]) {
+        self.sequence = sequence
+    }
+    
     public var description: String {
         "\(T.self): \(self.sequence.reduce(into: "") {$0 += String(T.convertBaseToUnicode(Nucleotide(rawValue: $1))!)})"
     }
