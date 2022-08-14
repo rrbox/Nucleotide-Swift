@@ -8,20 +8,29 @@
 import XCTest
 import Nucleotide
 
-final class AnalyzeTests: XCTestCase {
-    // N を含まない配列での塩基含有量計算テスト. 実行時間も計測.
-    func testTotalContentNotContainNSeq() throws {
-        let total = 1000000
-        let seq = BaseSequence<DNA>.init(
+final class AnalyzerMeasureTests: XCTestCase {
+    let seqLength = 1000000
+    var seq: BaseSequence<DNA>?
+    override func setUp() async throws {
+        self.seq = BaseSequence<DNA>.init(
             stringLiteral:
                 String(repeating: "A",
-                       count: total/2) + String(repeating: "G",
-                                                count: total/2))
+                       count: self.seqLength/2) + String(repeating: "G",
+                                                         count: self.seqLength/2))
+        
+    }
+    
+    // N を無視する場合の塩基含有量計算テスト. 実行時間も計測.
+    func testTotalContentIgnoreNSeq() throws {
         var result = 0
-        self.measure {
-            result = seq.contentTotal([.s], containN: true)
+        guard let seq = self.seq else {
+            return
         }
-        XCTAssertEqual(total/2, result)
+
+        self.measure {
+            result = seq.contentTotal([.s])
+        }
+        XCTAssertEqual(self.seqLength/2, result)
 //        計測結果
 //        10万塩基: 0.011 sec
 //        100万塩基: 0.110 sec
@@ -31,8 +40,29 @@ final class AnalyzeTests: XCTestCase {
 //        10億塩基: 100 sec
     }
     
-    // N を含む配列での塩基含有量計算テスト. 実行時間は計測しない.
-    func testTotalContentContainNSeq() throws {
+    // N を無視しない場合の塩基含有量計算テスト. 実行時間も計測.
+    func testTotalContentNotIgnoreNSeq() throws {
+        var result = 0
+        guard let seq = self.seq else {
+            return
+        }
+        
+        self.measure {
+            result = seq.contentTotal([.s], ignoreN: false)
+        }
+        XCTAssertEqual(self.seqLength/2, result)
+//        計測結果
+//        10万塩基: 0.012 sec
+//        100万塩基: 0.095 sec
+//        1000万塩基: 0.921 sec
+//        結論: N を無視しても無視しなくてもほとんど同じ.
+    }
+    
+}
+
+final class AnalyzeTests: XCTestCase {
+    // N を含む配列での塩基含有量計算テスト.
+    func testTotalContent() throws {
         let total = 100
         let seq = BaseSequence<DNA>.init(
             stringLiteral:
@@ -40,19 +70,16 @@ final class AnalyzeTests: XCTestCase {
             + String(repeating: "G", count: total/4)
             + String(repeating: "N", count: total/4)
             + String(repeating: "T", count: total/4))
-        // N を計算結果に含めない(デフォルト).
-        var result = seq.contentTotal([.s])
-        XCTAssertEqual(total/4, result)
         
-        // N を計算結果に含める(デフォルト).
-        result = seq.contentTotal([.s], containN: true)
-        // N と G が検出され, 合計される.
-        XCTAssertEqual(total/2, result)
+        
+        XCTAssertEqual(total/4, seq.contentTotal(.s))
+        XCTAssertEqual(0, seq.contentTotal([]))
         XCTAssertEqual(total/4, seq.contentTotal(.g))
-        XCTAssertEqual(total/2, seq.contentTotal(.a, containN: true))
+        XCTAssertEqual(total/2, seq.contentTotal(.g, ignoreN: false))
+        XCTAssertEqual(3 * (total/4), seq.contentTotal([.a, .g], ignoreN: false))
         XCTAssertEqual(0, seq.contentTotal(.c))
-        XCTAssertEqual(total, seq.contentTotal(.n, containN: true))
-        XCTAssertEqual(total, seq.contentTotal(.n, containN: false))
+        XCTAssertEqual(total, seq.contentTotal(.n))
+        XCTAssertEqual(total, seq.contentTotal(.n, ignoreN: false))
     }
     
 }

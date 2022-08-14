@@ -12,7 +12,7 @@ class DNATests: XCTestCase {
     func testTranscribe() throws {
         let dna: BaseSequence<DNA> = "ATGCATGC"
         let rna = dna.transcribed()
-        XCTAssertEqual(rna.description, "AUGCAUGC")
+        XCTAssertEqual(rna.description, "RNA: AUGCAUGC")
         
     }
 
