@@ -15,9 +15,9 @@ public struct Nucleotide: OptionSet {
 public extension Nucleotide {
     static let a = Self.init(rawValue: 0b11)
     static let c = Self.init(rawValue: 0b11 << 2)
-    static let g = Self.init(rawValue: 0b11 << 4)
-    static let t = Self.init(rawValue: 0b11 << 6)
-    static let u = Self.init(rawValue: 0b11 << 6)
+    static let g = Self.init(rawValue: 0b11 << 6)
+    static let t = Self.init(rawValue: 0b11 << 4)
+    static let u = Self.init(rawValue: 0b11 << 4)
 }
 
 // fasta 形式
