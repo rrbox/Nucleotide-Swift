@@ -51,11 +51,11 @@ public protocol BaseType {
 }
 
 extension BaseType {
-    static func unicodeConvertToBase(_ unicode: UnicodeScalar) -> Nucleotide? {
+    static func convertUnicodeToBase(_ unicode: UnicodeScalar) -> Nucleotide? {
         return Self.unicodeToBaseDict[unicode]
     }
     
-    static func baseConvertToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
+    static func convertBaseToUnicode(_ base: Nucleotide) -> UnicodeScalar? {
         return Self.baseToUnicodeDict[base.rawValue]
     }
 }
@@ -104,12 +104,12 @@ public struct BaseSequence<T: BaseType>: ExpressibleByStringLiteral, CustomStrin
     
     public init(stringLiteral value: StringLiteralType) {
         self.sequence = value.unicodeScalars.reduce(into: []) { partialResult, s in
-            partialResult.append(T.unicodeConvertToBase(s)!.rawValue)
+            partialResult.append(T.convertUnicodeToBase(s)!.rawValue)
         }
     }
     
     public var description: String {
-        "\(T.self): \(self.sequence.reduce(into: "") {$0 += String(T.baseConvertToUnicode(Nucleotide(rawValue: $1))!)})"
+        "\(T.self): \(self.sequence.reduce(into: "") {$0 += String(T.convertBaseToUnicode(Nucleotide(rawValue: $1))!)})"
     }
     
 }
