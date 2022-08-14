@@ -57,11 +57,34 @@ final class AnalyzerMeasureTests: XCTestCase {
 //        1000万塩基: 0.921 sec
 //        結論: N を無視しても無視しなくてもほとんど同じ.
     }
+
+//    相補的な配列の算出のテスト. 実行時間も計測.
+    func testComplementaryStrand() throws {
+        var result: BaseSequence<DNA>?
+        let target = BaseSequence<DNA>.init(
+            stringLiteral: String(repeating: "T",
+                                  count: self.seqLength/2) + String(repeating: "C",
+                                                                    count: self.seqLength/2))
+        guard let seq = self.seq else {
+            return
+        }
+        
+        self.measure {
+            result = seq.complementaryStrand()
+        }
+        
+        XCTAssertEqual(result!.description, target.description)
+//        計測結果
+//        10万塩基: 0.023 sec
+//        100万塩基: 0.205 sec
+//        1000万塩基: 2.019 sec
+        
+    }
     
 }
 
 final class AnalyzeTests: XCTestCase {
-    // N を含む配列での塩基含有量計算テスト.
+//     N を含む配列での塩基含有量計算テスト.
     func testTotalContent() throws {
         let total = 100
         let seq = BaseSequence<DNA>.init(
@@ -82,9 +105,10 @@ final class AnalyzeTests: XCTestCase {
         XCTAssertEqual(total, seq.contentTotal(.n, ignoreN: false))
     }
     
+//    相補的な配列を算出するテスト.
     func testComplementaryStrand() throws {
-        let dna: BaseSequence<DNA> = "ATGCATGC"
-        XCTAssertEqual(dna.complementaryStrand().description, "DNA: TACGTACG")
+        let dna: BaseSequence<DNA> = "ATGCATGCN"
+        XCTAssertEqual(dna.complementaryStrand().description, "DNA: TACGTACGN")
         
     }
     
