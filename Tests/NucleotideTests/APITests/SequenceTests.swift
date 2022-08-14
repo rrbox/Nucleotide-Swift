@@ -9,28 +9,20 @@ import XCTest
 import Nucleotide
 
 class SequenceTests: XCTestCase {
-
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
-    }
-
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
-
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-        // Any test you write for XCTest can be annotated as throws and async.
-        // Mark your test throws to produce an unexpected failure when your test encounters an uncaught error.
-        // Mark your test async to allow awaiting for asynchronous code to complete. Check the results with assertions afterwards.
-    }
-
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
+    func testPerformanceGenerateSequence() throws {
+        // 1000万塩基分の文字列を変換する時間を計測します.
         self.measure {
-            // Put the code you want to measure the time of here.
+            _ = BaseSequence<DNA>.init(stringLiteral: String(repeating: "A", count: 10000000))
         }
+//        計測結果
+//        10万塩基: 0.008 sec
+//        100万塩基: 0.052 sec
+//        1000万塩基: 0.480 sec
+//        1億塩基: 5.000 sec
+        
+//        予想
+//        10億塩基: 1 min
+//        30億塩基: 3 min
     }
 
 }
