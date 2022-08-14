@@ -9,7 +9,7 @@ public extension BaseSequence {
     /// 任意の複合塩基がいくつ含まれているかを算出します.
     /// ```swift
     /// let seq: BaseSequence<DNA> = "AAAAAAAAAAGGGGGGGGGG"
-    /// // GC含有率を計算
+    /// // GC含有数を計算
     /// print(seq.contentTotal([.c, .g])) // 10
     /// // or
     /// print(seq.contentTotal(.s)) // 10
