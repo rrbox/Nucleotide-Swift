@@ -15,13 +15,13 @@ final class NucleotideTests: XCTestCase {
         
         // 1000万塩基分の文字列を変換する時間を計測します.
         self.measure {
-            self.seq = .init(stringLiteral: String(repeating: "A", count: 10000000))
+            self.seq = .init(stringLiteral: String(repeating: "A", count: 100000000))
         }
 //        計測結果
-//        10万塩基: 0.009 sec
-//        100万塩基: 0.063 sec
-//        1000万塩基: 0.611 sec
-//        1億塩基: 6.140 sec
+//        10万塩基: 0.008 sec
+//        100万塩基: 0.052 sec
+//        1000万塩基: 0.490 sec
+//        1億塩基: 5.000 sec
         
 //        予想
 //        10億塩基: 1 min

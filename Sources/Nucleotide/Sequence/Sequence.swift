@@ -6,12 +6,12 @@
 //
 
 public protocol BaseType {
-    static var unicodeToBaseDict: [UnicodeScalar: Nucleotide] { get }
+    static var unicodeToBaseDict: [Unicode.UTF8.CodeUnit: Nucleotide] { get }
     static var baseToUnicodeDict: [UInt8: UnicodeScalar] { get }
 }
 
 extension BaseType {
-    static func convertUnicodeToBase(_ unicode: UnicodeScalar) -> Nucleotide? {
+    static func convertUnicodeToBase(_ unicode: Unicode.UTF8.CodeUnit) -> Nucleotide? {
         return Self.unicodeToBaseDict[unicode]
     }
     
@@ -22,12 +22,12 @@ extension BaseType {
 }
 
 public enum DNA: BaseType {
-    public static let unicodeToBaseDict: [UnicodeScalar: Nucleotide] = [
-        "A": .a,
-        "C": .c,
-        "G": .g,
-        "T": .t,
-        "N": .n,
+    public static let unicodeToBaseDict: [Unicode.UTF8.CodeUnit: Nucleotide] = [
+        UnicodeScalar("A").utf8.first!: .a,
+        UnicodeScalar("C").utf8.first!: .c,
+        UnicodeScalar("G").utf8.first!: .g,
+        UnicodeScalar("T").utf8.first!: .t,
+        UnicodeScalar("N").utf8.first!: .n,
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
@@ -41,12 +41,12 @@ public enum DNA: BaseType {
 }
 
 public enum RNA: BaseType {
-    public static let unicodeToBaseDict: [UnicodeScalar: Nucleotide] = [
-        "A": .a,
-        "C": .c,
-        "G": .g,
-        "U": .u,
-        "N": .n,
+    public static let unicodeToBaseDict: [Unicode.UTF8.CodeUnit: Nucleotide] = [
+        UnicodeScalar("A").utf8.first!: .a,
+        UnicodeScalar("C").utf8.first!: .c,
+        UnicodeScalar("G").utf8.first!: .g,
+        UnicodeScalar("U").utf8.first!: .u,
+        UnicodeScalar("N").utf8.first!: .n,
     ]
     
     public static let baseToUnicodeDict: [UInt8: UnicodeScalar] = [
@@ -63,9 +63,9 @@ public struct BaseSequence<T: BaseType>: ExpressibleByStringLiteral, CustomStrin
     var sequence: [UInt8]
     
     public init(stringLiteral value: StringLiteralType) {
-        self.sequence = value.unicodeScalars.reduce(into: []) { partialResult, s in
-            partialResult.append(T.convertUnicodeToBase(s)!.rawValue)
-        }
+        self.sequence = value.utf8.map({ s in
+            T.convertUnicodeToBase(s)!.rawValue
+        })
     }
     
     init(sequence: [UInt8]) {
