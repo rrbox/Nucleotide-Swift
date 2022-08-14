@@ -24,5 +24,14 @@ class SequenceTests: XCTestCase {
 //        10億塩基: 1 min
 //        30億塩基: 3 min
     }
+    
+    func testPerformanceDescription() {
+        let seq = BaseSequence<DNA>.init(stringLiteral: String(repeating: "A", count: 10000000))
+        self.measure {
+            _ = seq.description
+        }
+        
+//        1000万塩基: 1.184 sec
+    }
 
 }
