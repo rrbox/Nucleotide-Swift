@@ -46,4 +46,10 @@ public extension BaseSequence {
         }
     }
     
+    func complementaryStrand() -> BaseSequence<DNA> {
+        return BaseSequence<DNA>(sequence: self.sequence.map({ n in
+            bitRotateLeft(n, n: 4)
+        }))
+    }
+    
 }
