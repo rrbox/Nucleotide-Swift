@@ -22,6 +22,10 @@ public struct BaseSequenceSIMD64<T: BaseType>: CustomStringConvertible {
         }
     }
     
+    public init(seq: BaseSequence<T>) {
+        self.init(sequence: seq.sequence)
+    }
+    
     func description(simd: SIMD64<UInt8>) -> [Character] {
         (0 ..< 64).map { i in
             T.baseToUnicodeDict[simd[i]]!
