@@ -5,6 +5,9 @@
 //  Created by rrbox on 2022/08/16.
 //
 
+/// SIMD 64 で表現された配列を作成します.
+///
+/// 相補鎖の生成, 標準出力の表示などを BaseSequence よりも高速に行うことができます.
 public struct BaseSequenceSIMD64<T: BaseType>: CustomStringConvertible {
     var sequence: [SIMD64<UInt8>]
     
