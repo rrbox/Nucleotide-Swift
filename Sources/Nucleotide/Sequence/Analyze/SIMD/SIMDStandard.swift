@@ -7,24 +7,11 @@
 
 private extension BaseSequenceSIMD64 {
     func contentTotalNotIgnoreN(_ mask: UInt8) -> Int {
-//        let masked = self.sequence.map { simd in
-//            simd & mask
-//        }
-//        return masked.reduce(into: 0) { partialResult, n in
-//            for i in 0 ..< 64 {
-//                if n[i] != .zero {
-//                    partialResult += 1
-//                }
-//            }
-//        }
-        let a = 0 ..< 64
         return self.sequence.reduce(into: 0) { partialResult, simd in
-            let masked = simd & mask
-            partialResult += a.reduce(into: 0) { partialResult, i in
-                if masked[i] != .zero {
-                    partialResult += 1
-                }
-            }
+            let boolMask = (simd & mask) .!= SIMD64<UInt8>(repeating: 0)
+            partialResult += SIMD64(
+                clamping: SIMD64<UInt8>(repeating: 0)
+                    .replacing(with: 1, where: boolMask)).wrappedSum()
         }
     }
     
