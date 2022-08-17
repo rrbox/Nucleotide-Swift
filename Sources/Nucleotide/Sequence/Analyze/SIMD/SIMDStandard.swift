@@ -5,13 +5,18 @@
 //  Created by rrbox on 2022/08/16.
 //
 
+import simd
+
 private extension BaseSequenceSIMD64 {
     func contentTotalNotIgnoreN(_ mask: UInt8) -> Int {
         return self.sequence.reduce(into: 0) { partialResult, simd in
             let boolMask = (simd & mask) .!= SIMD64<UInt8>(repeating: 0)
-            partialResult += SIMD64(
-                clamping: SIMD64<UInt8>(repeating: 0)
-                    .replacing(with: 1, where: boolMask)).wrappedSum()
+//            partialResult += SIMD64(
+//                clamping: SIMD64<UInt8>(repeating: 0)
+//                    .replacing(with: 1, where: boolMask)).wrappedSum()
+            partialResult += Int(simd_reduce_add(SIMD64<UInt8>(repeating: 0)
+                .replacing(with: 1, where: boolMask)))
+
         }
     }
     

@@ -9,7 +9,7 @@ import XCTest
 import Nucleotide
 
 class SIMDAnalyzerMeasureTests: XCTestCase {
-    let seqLength = 100000
+    let seqLength = 10000000
     var seq: BaseSequenceSIMD64<DNA>?
     override func setUp() async throws {
         self.seq = BaseSequenceSIMD64<DNA>(seq: BaseSequence<DNA>.init(
@@ -51,11 +51,14 @@ class SIMDAnalyzerMeasureTests: XCTestCase {
             result = seq.contentTotal([.s], ignoreN: false)
         }
         XCTAssertEqual(self.seqLength/2, result)
-//        計測結果
+//        計測結果(Accelerate 使用)
+//        10万塩基: 0.012 sec
+//        100万塩基: 0.084 sec
+//        1000万塩基: 0.843
+//        計測結果(nod simd)
 //        10万塩基: 0.012 sec
 //        100万塩基: 0.095 sec
 //        1000万塩基: 0.921 sec
-//        結論: N を無視しても無視しなくてもほとんど同じ.
     }
     
     // 相補鎖の生成のテスト
