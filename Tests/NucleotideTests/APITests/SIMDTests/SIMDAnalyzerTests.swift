@@ -9,7 +9,7 @@ import XCTest
 import Nucleotide
 
 class SIMDAnalyzerMeasureTests: XCTestCase {
-    let seqLength = 10000000
+    let seqLength = 1000000
     var seq: BaseSequenceSIMD64<DNA>?
     override func setUp() async throws {
         self.seq = BaseSequenceSIMD64<DNA>(seq: BaseSequence<DNA>.init(
