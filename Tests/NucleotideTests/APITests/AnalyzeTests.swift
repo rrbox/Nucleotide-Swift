@@ -62,8 +62,8 @@ final class AnalyzerMeasureTests: XCTestCase {
     func testComplementaryStrand() throws {
         var result: BaseSequence<DNA>?
         let target = BaseSequence<DNA>.init(
-            stringLiteral: String(repeating: "T",
-                                  count: self.seqLength/2) + String(repeating: "C",
+            stringLiteral: String(repeating: "C",
+                                  count: self.seqLength/2) + String(repeating: "T",
                                                                     count: self.seqLength/2))
         guard let seq = self.seq else {
             return
@@ -108,8 +108,21 @@ final class AnalyzeTests: XCTestCase {
 //    相補的な配列を算出するテスト.
     func testComplementaryStrand() throws {
         let dna: BaseSequence<DNA> = "ATGCATGCN"
-        XCTAssertEqual(dna.complementaryStrand().description, "DNA: TACGTACGN")
-        XCTAssertEqual(dna.complementaryStrand(typeOf: RNA.self).description, "RNA: UACGUACGN")
+        XCTAssertEqual(
+            dna.complementaryStrand()
+                .description, "DNA: NGCATGCAT")
+        XCTAssertEqual(
+            dna.complementaryStrand(typeOf: RNA.self)
+                .description, "RNA: NGCAUGCAU")
+        
+    }
+    
+//    逆向き配列を算出するテスト.
+    func testfReverseStrand() throws {
+        let dna: BaseSequence<DNA> = "ATGCATGCN"
+        XCTAssertEqual(
+            dna.reversed()
+                .description, "DNA: NCGTACGTA")
         
     }
     

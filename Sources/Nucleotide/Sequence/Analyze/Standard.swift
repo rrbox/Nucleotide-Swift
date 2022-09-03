@@ -51,7 +51,7 @@ public extension BaseSequence {
     func complementaryStrand() -> BaseSequence<T> {
         return BaseSequence<T>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
-        }))
+        }).reversed())
     }
     
     /// 相補的な配列を算出します.
@@ -60,7 +60,12 @@ public extension BaseSequence {
     func complementaryStrand<U: BaseType>(typeOf type: U.Type) -> BaseSequence<U> {
         return BaseSequence<U>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
-        }))
+        }).reversed())
+    }
+    
+    /// 逆向き配列を出力します.
+    func reversed() -> BaseSequence<T> {
+        return BaseSequence<T>(sequence: self.sequence.reversed())
     }
     
 }
