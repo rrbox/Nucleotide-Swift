@@ -23,9 +23,9 @@ let gc = dna.contentTotal([.g, .c]) // 4
 let rna = dna.transcribed() // "RNA: AUGCAUGC"
 
 // Create a complementary strand of the sequence
-let s = dna.complementaryStrand() // "DNA: TACGTACG"
+let s = dna.complementaryStrand() // "DNA: CGATCGAT"
 // RNA sequences are also possible
-dna.complementaryStrand(typeOf: RNA.self) // "DNA: UACGUACG"
+dna.complementaryStrand(typeOf: RNA.self) // "DNA: GCAUGCAU"
 ```
 
 ### RNA sequence
