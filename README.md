@@ -1,5 +1,8 @@
 # Nucleotide
 
+[![GitHub issues](https://img.shields.io/github/issues/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/issues)
+[![GitHub license](https://img.shields.io/github/license/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/blob/main/LICENCE)
+
 ## Usage
 
 (Click [here](https://github.com/rrbox/Nucleotide-Swift/wiki) for details)
@@ -23,9 +26,9 @@ let gc = dna.contentTotal([.g, .c]) // 4
 let rna = dna.transcribed() // "RNA: AUGCAUGC"
 
 // Create a complementary strand of the sequence
-let s = dna.complementaryStrand() // "DNA: CGATCGAT"
+let s = dna.reverseComplementaryStrand() // "DNA: CGATCGAT"
 // RNA sequences are also possible
-dna.complementaryStrand(typeOf: RNA.self) // "DNA: GCAUGCAU"
+dna.reverseComplementaryStrand(typeOf: RNA.self) // "DNA: GCAUGCAU"
 ```
 
 ### RNA sequence
@@ -38,8 +41,8 @@ let rna: BaseSequence<RNA> = "AUGCAUGC"
 let gc = rna.contentTotal([.g, .c]) // 4
 
 // Create a complementary strand of the sequence
-let s = rna.complementaryStrand() // "RNA: UACGUACG"
+let s = rna.reverseComplementaryStrand() // "RNA: UACGUACG"
 
 // Generate cDNA of RNA
-let cDNA = rna.complementaryStrand(typeOf: DNA.self) // "DNA: TACGTACG"
+let cDNA = rna.reverseComplementaryStrand(typeOf: DNA.self) // "DNA: TACGTACG"
 ```
