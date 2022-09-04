@@ -46,17 +46,17 @@ public extension BaseSequence {
         }
     }
     
-    /// 相補的な配列を算出します.
-    /// - Returns: 現在の配列の相補鎖のデータをもつ配列.
+    /// 相補的な逆向き配列を算出します.
+    /// - Returns: 現在の配列の相補鎖に相当する配列.
     func reveseComplementaryStrand() -> BaseSequence<T> {
         return BaseSequence<T>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
         }).reversed())
     }
     
-    /// 相補的な配列を算出します.
+    /// 相補的な逆向き配列を算出します.
     /// - Parameter type: 塩基の型を選択することができます.
-    /// - Returns: 現在の配列の相補鎖のデータをもつ配列. type で指定した塩基が適用されます.
+    /// - Returns: 現在の配列の相補鎖に相当する配列. type で指定した塩基が適用されます.
     func reverseComplementaryStrand<U: BaseType>(typeOf type: U.Type) -> BaseSequence<U> {
         return BaseSequence<U>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
