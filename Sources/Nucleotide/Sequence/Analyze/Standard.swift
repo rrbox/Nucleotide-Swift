@@ -54,6 +54,14 @@ public extension BaseSequence {
         }).reversed())
     }
     
+    /// 全ての塩基を相補的な塩基に変換した配列を生成します.
+    /// - Returns: 現在の配列の相補鎖を逆向きにした配列に相当するデータ.
+    func complementaryStrand() -> BaseSequence<T> {
+        return BaseSequence<T>(sequence: self.sequence.map({ n in
+            bitRotateLeft(n, n: 4)
+        }))
+    }
+    
     /// 相補的な逆向き配列を算出します.
     /// - Parameter type: 塩基の型を選択することができます.
     /// - Returns: 現在の配列の相補鎖に相当する配列. type で指定した塩基が適用されます.
@@ -61,6 +69,14 @@ public extension BaseSequence {
         return BaseSequence<U>(sequence: self.sequence.map({ n in
             bitRotateLeft(n, n: 4)
         }).reversed())
+    }
+    
+    /// 全ての塩基を相補的な塩基に変換した配列を生成します.
+    /// - Returns: 現在の配列の相補鎖を逆向きにした配列に相当するデータ. type で指定した塩基が適用されます.
+    func complementaryStrand<U: BaseType>(typeOf type: U.Type) -> BaseSequence<U> {
+        return BaseSequence<U>(sequence: self.sequence.map({ n in
+            bitRotateLeft(n, n: 4)
+        }))
     }
     
     /// 逆向き配列を出力します.
