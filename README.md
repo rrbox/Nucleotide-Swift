@@ -1,5 +1,8 @@
 # Nucleotide
 
+[![GitHub issues](https://img.shields.io/github/issues/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/issues)
+[![GitHub license](https://img.shields.io/github/license/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/blob/main/LICENCE)
+
 ## Usage
 
 (Click [here](https://github.com/rrbox/Nucleotide-Swift/wiki) for details)
