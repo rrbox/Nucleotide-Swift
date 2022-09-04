@@ -70,7 +70,7 @@ final class AnalyzerMeasureTests: XCTestCase {
         }
         
         self.measure {
-            result = seq.complementaryStrand()
+            result = seq.reveseComplementaryStrand()
         }
         
         XCTAssertEqual(result!.description, target.description)
@@ -109,10 +109,10 @@ final class AnalyzeTests: XCTestCase {
     func testComplementaryStrand() throws {
         let dna: BaseSequence<DNA> = "ATGCATGCN"
         XCTAssertEqual(
-            dna.complementaryStrand()
+            dna.reveseComplementaryStrand()
                 .description, "DNA: NGCATGCAT")
         XCTAssertEqual(
-            dna.complementaryStrand(typeOf: RNA.self)
+            dna.reverseComplementaryStrand(typeOf: RNA.self)
                 .description, "RNA: NGCAUGCAU")
         
     }
