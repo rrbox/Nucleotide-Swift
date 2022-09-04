@@ -117,7 +117,19 @@ final class AnalyzeTests: XCTestCase {
         
     }
     
-//    逆向き配列を算出するテスト.
+//    相補的な配列を算出するテスト.
+    func testComplementaryStrand() throws {
+        let dna: BaseSequence<DNA> = "ATGCATGCN"
+        XCTAssertEqual(
+            dna.complementaryStrand()
+                .description, "DNA: TACGTACGN")
+        XCTAssertEqual(
+            dna.complementaryStrand(typeOf: RNA.self)
+                .description, "RNA: UACGUACGN")
+        
+    }
+    
+    //    逆向き配列を算出するテスト.
     func testfReverseStrand() throws {
         let dna: BaseSequence<DNA> = "ATGCATGCN"
         XCTAssertEqual(
