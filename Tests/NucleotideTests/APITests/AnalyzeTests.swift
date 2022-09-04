@@ -106,7 +106,7 @@ final class AnalyzeTests: XCTestCase {
     }
     
 //    相補的な配列を算出するテスト.
-    func testComplementaryStrand() throws {
+    func testReverseComplementaryStrand() throws {
         let dna: BaseSequence<DNA> = "ATGCATGCN"
         XCTAssertEqual(
             dna.reveseComplementaryStrand()
