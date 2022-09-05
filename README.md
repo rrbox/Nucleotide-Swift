@@ -2,6 +2,7 @@
 
 [![GitHub issues](https://img.shields.io/github/issues/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/issues)
 [![GitHub license](https://img.shields.io/github/license/rrbox/Nucleotide-Swift)](https://github.com/rrbox/Nucleotide-Swift/blob/main/LICENCE)
+[![Swift](https://github.com/rrbox/Nucleotide-Swift/actions/workflows/swift.yml/badge.svg?branch=develop)](https://github.com/rrbox/Nucleotide-Swift/actions/workflows/swift.yml)
 
 ## Usage
 
