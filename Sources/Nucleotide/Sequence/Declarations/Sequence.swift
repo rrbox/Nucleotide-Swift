@@ -25,6 +25,7 @@ public enum DNA: BaseType {
         Nucleotide.c.rawValue: "C",
         Nucleotide.g.rawValue: "G",
         Nucleotide.n.rawValue: "N",
+        0: "-",
     ]
     
 }
@@ -44,6 +45,7 @@ public enum RNA: BaseType {
         Nucleotide.c.rawValue: "C",
         Nucleotide.g.rawValue: "G",
         Nucleotide.n.rawValue: "N",
+        0: "-",
     ]
     
 }
